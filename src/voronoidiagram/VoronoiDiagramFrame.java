@@ -4,12 +4,12 @@
  */
 package voronoidiagram;
 
-/**
- *
- * @author pikes7641
- */
-public class VoronoiDiagramFrame extends javax.swing.JFrame {
+import java.util.ArrayList;
 
+public class VoronoiDiagramFrame extends javax.swing.JFrame {
+    
+    ArrayList<Point2D> pointArray = new ArrayList<Point2D>();
+    
     /**
      * Creates new form VoronoiDiagramFrame
      */
@@ -26,21 +26,68 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        drawingBoard = new javax.swing.JPanel();
+        numPoints = new javax.swing.JTextField();
+        generatePoints = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        drawingBoard.setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout drawingBoardLayout = new javax.swing.GroupLayout(drawingBoard);
+        drawingBoard.setLayout(drawingBoardLayout);
+        drawingBoardLayout.setHorizontalGroup(
+            drawingBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+        drawingBoardLayout.setVerticalGroup(
+            drawingBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        numPoints.setText("Number of Points");
+
+        generatePoints.setText("Generate");
+        generatePoints.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generatePointsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(drawingBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(generatePoints)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(drawingBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(generatePoints))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void generatePointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePointsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_generatePointsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +124,8 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel drawingBoard;
+    private javax.swing.JButton generatePoints;
+    private javax.swing.JTextField numPoints;
     // End of variables declaration//GEN-END:variables
 }

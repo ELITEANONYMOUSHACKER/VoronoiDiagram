@@ -4,19 +4,21 @@
  */
 package voronoidiagram;
 
-/**
- *
- * @author pikes7641
- */
+import java.awt.*;
+
 public class Point2D {
     
-    double x;
-    double y;
+    int x;
+    int y;
     
-    public Point2D(double a, double b) {
+    public Point2D(int a, int b) {
         this.x = a;
         this.y = b;
     }
     
+    public Edge makeEdge(Point2D other) {
+        Edge a = new Edge(this, other);
+        return a;
+    }
     
 }
