@@ -27,9 +27,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="drawingBoard" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="generatePoints" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="numPoints" min="-2" pref="96" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="generatePoints" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="numPoints" min="-2" pref="96" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="drawPoints" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -48,6 +53,8 @@
                           <Component id="numPoints" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="generatePoints" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
+                      <Component id="drawPoints" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -87,6 +94,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generatePointsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="drawPoints">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Draw Points"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="drawPointsActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

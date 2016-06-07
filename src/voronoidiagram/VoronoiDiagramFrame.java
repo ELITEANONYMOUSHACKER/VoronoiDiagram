@@ -5,6 +5,7 @@
 package voronoidiagram;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class VoronoiDiagramFrame extends javax.swing.JFrame {
     
@@ -29,6 +30,7 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         drawingBoard = new javax.swing.JPanel();
         numPoints = new javax.swing.JTextField();
         generatePoints = new javax.swing.JButton();
+        drawPoints = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,6 +56,13 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
             }
         });
 
+        drawPoints.setText("Draw Points");
+        drawPoints.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                drawPointsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,9 +71,12 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(drawingBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(generatePoints)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(generatePoints)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(drawPoints))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -78,16 +90,43 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(generatePoints))))
+                            .addComponent(generatePoints))
+                        .addGap(244, 244, 244)
+                        .addComponent(drawPoints)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public Point2D createRandomPoint() {
+        
+        //creates a random point anywhere on the panel
+        Random r = new Random();
+        
+        int x = r.nextInt(drawingBoard.getWidth());
+        int y = r.nextInt(drawingBoard.getHeight());
+        
+        return new Point2D(x, y);
+        
+    }
+    
     private void generatePointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePointsActionPerformed
-        // TODO add your handling code here:
+        
+        //generates a number of random points specified by the user
+        int nPoints = Integer.parseInt(numPoints.getText());
+        
+        for (int i=0; i<nPoints; i++) {
+            
+            pointArray.add(createRandomPoint());
+            
+        }
+        
     }//GEN-LAST:event_generatePointsActionPerformed
+
+    private void drawPointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawPointsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_drawPointsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,6 +163,7 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton drawPoints;
     private javax.swing.JPanel drawingBoard;
     private javax.swing.JButton generatePoints;
     private javax.swing.JTextField numPoints;
