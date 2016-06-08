@@ -21,4 +21,12 @@ public class Point2D {
         return a;
     }
     
+    public double findDistance(AccuratePoint other) {
+        
+        double d = Math.sqrt(Math.pow(((double)this.x)-other.x, 2)+Math.pow(((double)this.y)-other.y, 2));
+        
+        return d;
+        
+    }
+    
 }
