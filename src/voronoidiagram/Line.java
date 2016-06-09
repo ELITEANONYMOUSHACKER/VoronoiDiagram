@@ -13,23 +13,23 @@ public class Line {
     double slope;
     double yInt;
 
-    
     public Line(double s, double y) {
         
         this.slope = s;
         this.yInt = y;
         
     }
-    
-    public Line findPerpendicularLine(Point2D a) {
+    //Finds the line perpendicular to this line given a point which lies 
+    //on the perpendicular line
+    public Line findPerpendicularLine(AccuratePoint a) {
         
-        double m = -(1/this.slope);
-        double b = a.y-(m*a.x);
+        double m = -(1/this.slope); //finds the slope
+        double b = a.y-(m*a.x);     //finds the y intercept
         
         return new Line(m, b);
         
     }
-    
+    //Finds the intersection of this line and another line
     public AccuratePoint findIntersection(Line other) {
         
         double x = (other.yInt-this.yInt)/(this.slope-other.slope);

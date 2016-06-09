@@ -16,6 +16,7 @@ public class Point2D {
         this.y = b;
     }
     
+    //Creates an edge object given this point and another point
     public Edge makeEdge(Point2D other) {
         Edge a = new Edge(this, other);
         return a;
