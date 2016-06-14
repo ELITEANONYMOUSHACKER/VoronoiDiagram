@@ -4,12 +4,22 @@
  */
 package voronoidiagram;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
 public class VoronoiDiagramFrame extends javax.swing.JFrame {
     
     ArrayList<Point2D> pointArray = new ArrayList<Point2D>();
+    ArrayList<Edge> edgeArray = new ArrayList<Edge>();
+    ArrayList<VoronoiCell> cellArray = new ArrayList<VoronoiCell>();
+    
+    boolean drawP = false;
+    boolean drawE = false;
+    boolean drawV = false;
     
     /**
      * Creates new form VoronoiDiagramFrame
@@ -27,7 +37,6 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        drawingBoard = new javax.swing.JPanel();
         numPoints = new javax.swing.JTextField();
         generatePoints = new javax.swing.JButton();
         drawPoints = new javax.swing.JButton();
@@ -41,19 +50,6 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        drawingBoard.setBackground(new java.awt.Color(204, 204, 204));
-
-        javax.swing.GroupLayout drawingBoardLayout = new javax.swing.GroupLayout(drawingBoard);
-        drawingBoard.setLayout(drawingBoardLayout);
-        drawingBoardLayout.setHorizontalGroup(
-            drawingBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-        drawingBoardLayout.setVerticalGroup(
-            drawingBoardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
 
         numPoints.setText("Number of Points");
 
@@ -112,9 +108,7 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(drawingBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
@@ -144,37 +138,32 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(generatePoints))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(drawingBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(generatePoints))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton5)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(35, 35, 35)
-                                .addComponent(jButton3)
-                                .addGap(29, 29, 29))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(drawPoints)
-                            .addComponent(jButton4))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jButton5)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton3)
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(drawPoints)
+                    .addComponent(jButton4))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pack();
@@ -185,8 +174,8 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         //creates a random point anywhere on the panel
         Random r = new Random();
         
-        int x = r.nextInt(drawingBoard.getWidth());
-        int y = r.nextInt(drawingBoard.getHeight());
+        int x = r.nextInt(800);
+        int y = r.nextInt(800);
         
         return new Point2D(x, y);
         
@@ -206,7 +195,7 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_generatePointsActionPerformed
 
     private void drawPointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawPointsActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_drawPointsActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -228,6 +217,52 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    public void Paint(Graphics g) {
+        
+        if (drawP == true) {
+            
+            g.setColor(Color.black);
+            
+            for (int i=0; i<pointArray.size(); i++) {
+                
+                Point2D a = new Point2D(pointArray.get(i).x, pointArray.get(i).y);
+                g.drawOval(a.x-2, a.y-2, 4, 4);
+            }
+            
+        }
+        
+        if (drawE == true) {
+            
+            g.setColor(Color.black);
+            
+            for (int i=0; i<edgeArray.size(); i++) {
+                
+                Edge k = new Edge(edgeArray.get(i).a, edgeArray.get(i).b);
+                g.drawLine(k.a.x, k.a.y, k.b.x, k.b.y);
+            }
+            
+        }
+        if (drawV == true) {
+            
+            
+            for (int i=0; i<cellArray.size(); i++) {
+                
+                
+                VoronoiCell c = cellArray.get(i);
+                g.setColor(c.colour);
+
+            }
+            
+        }
+    }
+    public void initializeWindow(){
+        
+        setSize(800,800);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+        
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -261,7 +296,6 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton drawPoints;
-    private javax.swing.JPanel drawingBoard;
     private javax.swing.JButton generatePoints;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
