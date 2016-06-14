@@ -181,6 +181,51 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         
     }
     
+    public void arbTriangulate() {
+        
+        //triangulates the array of points arbitrarily
+        Point2D[] p = new Point2D[pointArray.size()];
+        p = pointArray.toArray(p);
+        
+        edgeArray.add(new Edge(p[0], p[1]));
+        edgeArray.add(new Edge(p[0], p[2]));
+        edgeArray.add(new Edge(p[1], p[2]));
+        
+        for (int i=3; i<p.length; i++) {
+            
+            edgeArray.add(new Edge(p[i-1], p[i]));
+            
+            Edge[] e = new Edge[edgeArray.size()];
+            e = edgeArray.toArray(e);
+
+            //checks if more edges can be added with the new point
+            for (int j=0; j<i; j++) {
+                            
+                boolean intersectionCheck = false;
+                
+                Edge s = new Edge(p[i], p[j]);
+                
+                //checks if a potential edge intersects another edge
+                for (int k=0; k<e.length; k++) {
+                    
+                    if (s.checkIntersection(e[k])) {
+                        intersectionCheck = true;
+                    }
+                    
+                }
+                //If it did not intersect add it to the array
+                if (intersectionCheck == false) {
+                    
+                    edgeArray.add(new Edge(p[i], p[j]));
+                    
+                }
+                
+            }
+            
+        }
+        
+    }
+    
     private void generatePointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatePointsActionPerformed
         
         //generates a number of random points specified by the user

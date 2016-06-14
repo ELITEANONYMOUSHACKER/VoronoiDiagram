@@ -66,6 +66,48 @@ public class Edge {
         
         return p;
         
-    }    
+    } 
+    
+    //Checks whether the edges intersect
+    // returns true if there is an intersection
+    public boolean checkIntersection(Edge other) {
+        
+        Line a = this.findLine();
+        Line b = other.findLine();
+        
+        AccuratePoint k = a.findIntersection(b);
+        
+        if (this.checkIfPointIsOnEdge(k) && other.checkIfPointIsOnEdge(k)) {
+            
+            return true;
+            
+        }
+        
+        else {
+            return false;
+        }
+        
+    }
+    
+    public boolean checkIfPointIsOnEdge(AccuratePoint a) {
+        
+        //checks if a point lies on an edge
+        //returns true if it does lie on the edge
+        if (((this.a.x <= a.x) && (this.b.x >= a.x)) || ((this.a.x >= a.x) && (this.b.x <= a.x))) {
+            if (((this.a.y <= a.y) && (this.b.y >= a.y)) || ((this.a.y >= a.y) && (this.b.y <= a.y))) {
+                
+                return true;
+                
+            }
+            else {
+                return false;
+            }
+        }
+        
+        else {
+            return false;
+        }
+        
+    }
     
 }
