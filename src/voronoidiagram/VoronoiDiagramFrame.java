@@ -16,11 +16,7 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
     ArrayList<Point2D> pointArray = new ArrayList<Point2D>();
     ArrayList<Edge> edgeArray = new ArrayList<Edge>();
     ArrayList<VoronoiCell> cellArray = new ArrayList<VoronoiCell>();
-    
-    boolean drawP = false;
-    boolean drawE = false;
-    boolean drawV = false;
-    
+
     /**
      * Creates new form VoronoiDiagramFrame
      */
@@ -40,14 +36,9 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         numPoints = new javax.swing.JTextField();
         generatePoints = new javax.swing.JButton();
         drawPoints = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        triangulate = new javax.swing.JButton();
+        drawTriangulation = new javax.swing.JButton();
+        drawCells = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,72 +58,47 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Triangulation");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        triangulate.setText("Triangulation");
+        triangulate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                triangulateActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Circumcircle");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        drawTriangulation.setText("Draw Triangulation");
+        drawTriangulation.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                drawTriangulationActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Choose Colour");
-
-        jTextField1.setText("RGB Value");
-
-        jButton4.setText("Draw Diagram");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        drawCells.setText("Draw Diagram");
+        drawCells.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                drawCellsActionPerformed(evt);
             }
         });
-
-        jTextField2.setText("Coordinates");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Generate Point");
-
-        jTextField3.setText("Coordinates");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(generatePoints)
+                        .addGap(46, 46, 46))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(drawPoints)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField3))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(generatePoints)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(drawPoints)
+                            .addComponent(triangulate))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(drawTriangulation, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(drawCells))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -142,28 +108,15 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(numPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(generatePoints))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton3)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(drawPoints)
-                    .addComponent(jButton4))
-                .addGap(28, 28, 28)
+                    .addComponent(drawCells)
+                    .addComponent(drawPoints))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(77, Short.MAX_VALUE))
+                    .addComponent(drawTriangulation)
+                    .addComponent(triangulate))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,74 +193,36 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_generatePointsActionPerformed
 
     private void drawPointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawPointsActionPerformed
-        
+        //draws the points
+        DrawingBoard a = new DrawingBoard(true, false, false, pointArray, edgeArray, cellArray);
+        a.initializeWindow(); 
+        a.setVisible(true);
     }//GEN-LAST:event_drawPointsActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void drawTriangulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawTriangulationActionPerformed
+        //draws the edges
+        DrawingBoard b = new DrawingBoard(false, true, false, pointArray, edgeArray, cellArray);
+        b.initializeWindow();
+        b.setVisible(true);
+    }//GEN-LAST:event_drawTriangulationActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void drawCellsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drawCellsActionPerformed
+        //draws the cells
+        DrawingBoard c = new DrawingBoard(false, false, true, pointArray, edgeArray, cellArray);
+        c.initializeWindow();
+        c.setVisible(true);
+    }//GEN-LAST:event_drawCellsActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void triangulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangulateActionPerformed
+    
+        arbTriangulate();       
+    }//GEN-LAST:event_triangulateActionPerformed
 
     /**
      * @param args the command line arguments
      */
     
-    public void Paint(Graphics g) {
-        
-        if (drawP == true) {
-            
-            g.setColor(Color.black);
-            
-            for (int i=0; i<pointArray.size(); i++) {
-                
-                Point2D a = new Point2D(pointArray.get(i).x, pointArray.get(i).y);
-                g.drawOval(a.x-2, a.y-2, 4, 4);
-            }
-            
-        }
-        
-        if (drawE == true) {
-            
-            g.setColor(Color.black);
-            
-            for (int i=0; i<edgeArray.size(); i++) {
-                
-                Edge k = new Edge(edgeArray.get(i).a, edgeArray.get(i).b);
-                g.drawLine(k.a.x, k.a.y, k.b.x, k.b.y);
-            }
-            
-        }
-        if (drawV == true) {
-            
-            
-            for (int i=0; i<cellArray.size(); i++) {
-                
-                
-                VoronoiCell c = cellArray.get(i);
-                g.setColor(c.colour);
 
-            }
-            
-        }
-    }
-    public void initializeWindow(){
-        
-        setSize(800,800);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setVisible(true);
-        
-    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -340,16 +255,11 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton drawCells;
     private javax.swing.JButton drawPoints;
+    private javax.swing.JButton drawTriangulation;
     private javax.swing.JButton generatePoints;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField numPoints;
+    private javax.swing.JButton triangulate;
     // End of variables declaration//GEN-END:variables
 }
