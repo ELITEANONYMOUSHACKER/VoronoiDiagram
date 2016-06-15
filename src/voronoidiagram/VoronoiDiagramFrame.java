@@ -134,7 +134,7 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
         
     }
     
-    public void arbTriangulate() {
+    public void triangulate() {
         
         //triangulates the array of points arbitrarily
         Point2D[] p = new Point2D[pointArray.size()];
@@ -215,7 +215,7 @@ public class VoronoiDiagramFrame extends javax.swing.JFrame {
 
     private void triangulateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_triangulateActionPerformed
     
-        arbTriangulate();       
+        triangulate();       
     }//GEN-LAST:event_triangulateActionPerformed
 
     /**
